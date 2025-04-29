@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Copiar ID do Evento</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 60px;
+    }
+    .mensagem {
+      font-size: 1.5em;
+      margin-top: 20px;
+      color: green;
+    }
+  </style>
+  <script>
+    function copiarID() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      if (id) {
+        navigator.clipboard.writeText(id).then(() => {
+          document.getElementById("mensagem").textContent = `ID "${id}" copiado para a área de transferência!`;
+        }).catch(err => {
+          document.getElementById("mensagem").textContent = "Erro ao copiar o ID.";
+        });
+      } else {
+        document.getElementById("mensagem").textContent = "ID não encontrado na URL.";
+      }
+    }
+    window.onload = copiarID;
+  </script>
+</head>
+<body>
+  <h1>Copiando ID do Evento...</h1>
+  <div id="mensagem" class="mensagem"></div>
+</body>
+</html>
